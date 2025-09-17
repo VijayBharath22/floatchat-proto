@@ -1,0 +1,219 @@
+/* Mode-specific styles */
+
+/* Explorer Mode - Playful, vibrant theme */
+.app-container[data-mode="explorer"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.app-container[data-mode="explorer"] .globe {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    box-shadow: 
+        0 0 50px rgba(0, 212, 255, 0.4),
+        inset 0 0 50px rgba(255, 255, 255, 0.2);
+}
+
+.app-container[data-mode="explorer"] .argo-dot {
+    background: #ffd700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    animation: explorerPulse 1.5s infinite;
+}
+
+@keyframes explorerPulse {
+    0%, 100% { 
+        transform: scale(1); 
+        opacity: 1; 
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    }
+    50% { 
+        transform: scale(1.3); 
+        opacity: 0.8; 
+        box-shadow: 0 0 25px rgba(255, 215, 0, 0.9);
+    }
+}
+
+.app-container[data-mode="explorer"] .prompt-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.app-container[data-mode="explorer"] .prompt-card:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.app-container[data-mode="explorer"] .message.assistant .message-content {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Navigator Mode - Oceanic blue/teal theme */
+.app-container[data-mode="navigator"] {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
+
+.app-container[data-mode="navigator"] .globe {
+    background: linear-gradient(135deg, #0f4c75 0%, #3282b8 100%);
+    box-shadow: 
+        0 0 50px rgba(50, 130, 184, 0.4),
+        inset 0 0 50px rgba(255, 255, 255, 0.1);
+}
+
+.app-container[data-mode="navigator"] .argo-dot {
+    background: #00d4ff;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+    animation: navigatorPulse 2s infinite;
+}
+
+@keyframes navigatorPulse {
+    0%, 100% { 
+        transform: scale(1); 
+        opacity: 1; 
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+    }
+    50% { 
+        transform: scale(1.2); 
+        opacity: 0.9; 
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+    }
+}
+
+.app-container[data-mode="navigator"] .top-nav {
+    background: rgba(15, 76, 117, 0.2);
+    border-bottom: 1px solid rgba(50, 130, 184, 0.3);
+}
+
+.app-container[data-mode="navigator"] .sidebar,
+.app-container[data-mode="navigator"] .filters-panel {
+    background: rgba(15, 76, 117, 0.15);
+    border-right: 1px solid rgba(50, 130, 184, 0.2);
+}
+
+.app-container[data-mode="navigator"] .chatbot-container {
+    background: rgba(15, 76, 117, 0.1);
+}
+
+.app-container[data-mode="navigator"] .prompt-card {
+    background: rgba(50, 130, 184, 0.1);
+    border: 1px solid rgba(50, 130, 184, 0.3);
+}
+
+.app-container[data-mode="navigator"] .prompt-card:hover {
+    background: rgba(50, 130, 184, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(50, 130, 184, 0.2);
+}
+
+.app-container[data-mode="navigator"] .message.assistant .message-content {
+    background: rgba(50, 130, 184, 0.1);
+    border: 1px solid rgba(50, 130, 184, 0.2);
+}
+
+/* Researcher Mode - Professional dark theme */
+.app-container[data-mode="researcher"] {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+.app-container[data-mode="researcher"] .globe {
+    background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
+    box-shadow: 
+        0 0 50px rgba(52, 73, 94, 0.4),
+        inset 0 0 50px rgba(255, 255, 255, 0.05);
+}
+
+.app-container[data-mode="researcher"] .argo-dot {
+    background: #e74c3c;
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
+    animation: researcherPulse 2.5s infinite;
+}
+
+@keyframes researcherPulse {
+    0%, 100% { 
+        transform: scale(1); 
+        opacity: 1; 
+        box-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
+    }
+    50% { 
+        transform: scale(1.1); 
+        opacity: 0.9; 
+        box-shadow: 0 0 18px rgba(231, 76, 60, 0.8);
+    }
+}
+
+.app-container[data-mode="researcher"] .top-nav {
+    background: rgba(44, 62, 80, 0.3);
+    border-bottom: 1px solid rgba(52, 73, 94, 0.4);
+}
+
+.app-container[data-mode="researcher"] .sidebar,
+.app-container[data-mode="researcher"] .filters-panel {
+    background: rgba(44, 62, 80, 0.2);
+    border-right: 1px solid rgba(52, 73, 94, 0.3);
+}
+
+.app-container[data-mode="researcher"] .chatbot-container {
+    background: rgba(44, 62, 80, 0.15);
+}
+
+.app-container[data-mode="researcher"] .prompt-card {
+    background: rgba(52, 73, 94, 0.1);
+    border: 1px solid rgba(52, 73, 94, 0.3);
+}
+
+.app-container[data-mode="researcher"] .prompt-card:hover {
+    background: rgba(52, 73, 94, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(52, 73, 94, 0.3);
+}
+
+.app-container[data-mode="researcher"] .message.assistant .message-content {
+    background: rgba(52, 73, 94, 0.1);
+    border: 1px solid rgba(52, 73, 94, 0.2);
+}
+
+/* Mode-specific typography */
+.app-container[data-mode="explorer"] {
+    font-family: 'Inter', sans-serif;
+}
+
+.app-container[data-mode="navigator"] {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+.app-container[data-mode="researcher"] {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+}
+
+/* Mode-specific button styles */
+.app-container[data-mode="explorer"] .btn-login,
+.app-container[data-mode="explorer"] .btn-signup {
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.app-container[data-mode="navigator"] .btn-login,
+.app-container[data-mode="navigator"] .btn-signup {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.app-container[data-mode="researcher"] .btn-login,
+.app-container[data-mode="researcher"] .btn-signup {
+    border-radius: 6px;
+    font-weight: 400;
+}
+
+/* Mode-specific globe patterns */
+.app-container[data-mode="explorer"] .globe::before {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,50 Q30,20 50,50 T90,50" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="none"/><path d="M10,30 Q30,60 50,30 T90,30" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="none"/><path d="M10,70 Q30,40 50,70 T90,70" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="none"/></svg>');
+}
+
+.app-container[data-mode="navigator"] .globe::before {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,50 Q30,20 50,50 T90,50" stroke="rgba(0,212,255,0.3)" stroke-width="0.8" fill="none"/><path d="M10,30 Q30,60 50,30 T90,30" stroke="rgba(0,212,255,0.3)" stroke-width="0.8" fill="none"/><path d="M10,70 Q30,40 50,70 T90,70" stroke="rgba(0,212,255,0.3)" stroke-width="0.8" fill="none"/></svg>');
+}
+
+.app-container[data-mode="researcher"] .globe::before {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,50 Q30,20 50,50 T90,50" stroke="rgba(231,76,60,0.2)" stroke-width="0.6" fill="none"/><path d="M10,30 Q30,60 50,30 T90,30" stroke="rgba(231,76,60,0.2)" stroke-width="0.6" fill="none"/><path d="M10,70 Q30,40 50,70 T90,70" stroke="rgba(231,76,60,0.2)" stroke-width="0.6" fill="none"/></svg>');
+}

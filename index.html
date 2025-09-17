@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FloatChat - AI-Powered Ocean Data Discovery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Leaflet CSS and JS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+    <!-- Mode Switcher (Top Right) -->
+    <div class="mode-switcher">
+        <div class="mode-options">
+            <button class="mode-btn" data-mode="explorer">
+                <i class="fas fa-compass"></i>
+                <span>Explorer</span>
+            </button>
+            <button class="mode-btn" data-mode="navigator">
+                <i class="fas fa-ship"></i>
+                <span>Navigator</span>
+            </button>
+            <button class="mode-btn active" data-mode="researcher">
+                <i class="fas fa-microscope"></i>
+                <span>Researcher</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <select id="languageSelect">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+            <option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option>
+        </select>
+    </div>
+
+    <!-- Login/Signup Buttons -->
+    <div class="auth-buttons">
+        <button class="btn-login">Login</button>
+        <button class="btn-signup">Sign Up</button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Enhanced Sidebar -->
+        <div class="sidebar">
+            <!-- Logo Section -->
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-water"></i>
+                    <span>FloatChat</span>
+                </div>
+                <button class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="sidebar-nav">
+                <button class="nav-btn active" data-tab="globe">
+                    <i class="fas fa-globe"></i>
+                    <span>Globe</span>
+                </button>
+                <button class="nav-btn" data-tab="chatbot">
+                    <i class="fas fa-comments"></i>
+                    <span>Chatbot</span>
+                </button>
+            </div>
+
+            <!-- Chat Actions -->
+            <div class="sidebar-actions">
+                <button class="action-btn" id="newChatBtn">
+                    <i class="fas fa-plus"></i>
+                    <span>New Chat</span>
+                </button>
+                <button class="action-btn" id="historyBtn">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </button>
+                <button class="action-btn" id="exportBtn">
+                    <i class="fas fa-download"></i>
+                    <span>Export</span>
+                </button>
+                <button class="action-btn" id="alertsBtn">
+                    <i class="fas fa-bell"></i>
+                    <span>Alerts</span>
+                </button>
+            </div>
+
+            <!-- User Section -->
+            <div class="sidebar-user">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">Guest User</span>
+                        <span class="user-role">Explorer</span>
+                    </div>
+                </div>
+                <div class="user-actions">
+                    <button class="btn-login">Login</button>
+                    <button class="btn-signup">Sign Up</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Backdrop -->
+        <div class="filter-backdrop" id="filterBackdrop"></div>
+
+        <!-- Filter Drawer -->
+        <div class="filter-drawer" id="filterDrawer">
+            <div class="drawer-header">
+                <h3>Filters</h3>
+                <button class="close-drawer" id="closeDrawer">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="drawer-content">
+                <div class="filter-group">
+                    <label>Region</label>
+                    <select id="regionFilter">
+                        <option value="all">All Regions</option>
+                        <option value="indian">Indian Ocean</option>
+                        <option value="pacific">Pacific Ocean</option>
+                        <option value="atlantic">Atlantic Ocean</option>
+                        <option value="southern">Southern Ocean</option>
+                        <option value="arctic">Arctic Ocean</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Country</label>
+                    <select id="countryFilter">
+                        <option value="all">All Countries</option>
+                        <option value="india">India</option>
+                        <option value="usa">USA</option>
+                        <option value="japan">Japan</option>
+                        <option value="australia">Australia</option>
+                        <option value="uk">United Kingdom</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Year</label>
+                    <select id="yearFilter">
+                        <option value="all">All Years</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Parameters</label>
+                    <select id="paramFilter">
+                        <option value="all">All Parameters</option>
+                        <option value="temp">Temperature</option>
+                        <option value="salinity">Salinity</option>
+                        <option value="pressure">Pressure</option>
+                        <option value="oxygen">Oxygen</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Data Quality</label>
+                    <select id="qualityFilter">
+                        <option value="all">All Quality</option>
+                        <option value="high">High Quality</option>
+                        <option value="medium">Medium Quality</option>
+                        <option value="low">Low Quality</option>
+                    </select>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn-apply" id="applyFilters">Apply Filters</button>
+                    <button class="btn-clear" id="clearFilters">Clear All</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Globe Tab -->
+            <div class="tab-content active" id="globe-tab">
+                <!-- Enhanced Globe Area -->
+                <div class="globe-area">
+                    <!-- Globe Controls -->
+                    <div class="globe-controls">
+                        <div class="view-controls">
+                            <button class="control-btn" id="satelliteView" title="Satellite View">
+                                <i class="fas fa-satellite"></i>
+                            </button>
+                            <button class="control-btn" id="terrainView" title="Terrain View">
+                                <i class="fas fa-mountain"></i>
+                            </button>
+                            <button class="control-btn" id="politicalView" title="Political Boundaries">
+                                <i class="fas fa-map"></i>
+                            </button>
+                            <button class="control-btn" id="nightView" title="Night View">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </div>
+                        <div class="zoom-controls">
+                            <button class="control-btn" id="zoomIn" title="Zoom In">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="control-btn" id="zoomOut" title="Zoom Out">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button class="control-btn" id="resetView" title="Reset View">
+                                <i class="fas fa-home"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                        <!-- Globe Container -->
+                        <div class="globe-container">
+                            <div class="leaflet-container" id="leafletMap">
+                                <!-- Leaflet 2D World Map will be rendered here -->
+                            </div>
+                            <!-- Map controls overlay -->
+                            <div class="globe-controls-overlay">
+                                <button class="control-btn auto-rotate-btn" id="autoRotateBtn" title="Toggle Auto Rotation">
+                                    <i class="fas fa-play" id="autoRotateIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    <!-- Loading Overlay -->
+                    <div class="loading-overlay" id="loadingOverlay">
+                        <div class="loading-spinner">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <p>Loading ocean data...</p>
+                    </div>
+                </div>
+
+                <!-- Chat Input Bar -->
+                <div class="chat-input-bar">
+                    <div class="chat-input-container">
+                        <button class="chat-icon">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                        <input type="text" id="chatInput" placeholder="Ask about ocean data...">
+                        <button class="mic-icon">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chatbot Tab -->
+            <div class="tab-content" id="chatbot-tab">
+                <div class="chatbot-container">
+                    <div class="chatbot-header">
+                        <h1>FloatChat Assistant</h1>
+                        <p>How may I help you explore ocean data?</p>
+                    </div>
+
+                    <div class="suggested-prompts">
+                        <h3>Suggested Questions</h3>
+                        <div class="prompt-grid" id="promptGrid">
+                            <!-- Prompts will be generated by JavaScript based on mode -->
+                        </div>
+                    </div>
+
+                    <div class="conversation-area" id="conversationArea">
+                        <div class="message bot-message">
+                            <div class="message-content">
+                                <p>Hello! I'm your AI assistant for ocean data exploration. What would you like to know
+                                    about ARGO float data?</p>
+                            </div>
+                            <div class="message-actions">
+                                <button class="action-btn" title="Copy">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                                <button class="action-btn" title="Export">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="action-btn" title="Audio">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-area">
+                        <div class="input-container">
+                            <input type="text" id="chatbotInput" placeholder="Type your question...">
+                            <button class="send-btn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Overlay (Half Screen) -->
+    <div class="chat-overlay" id="chatOverlay">
+        <div class="overlay-header">
+            <h3>Quick Chat</h3>
+            <button class="close-overlay">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="overlay-content">
+            <div class="overlay-messages" id="overlayMessages">
+                <!-- Messages will be added here -->
+            </div>
+            <div class="overlay-input">
+                <input type="text" id="overlayInput" placeholder="Ask a quick question...">
+                <button class="overlay-send">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="export-modal" id="exportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Export Data</h3>
+                <button class="close-modal" id="closeExportModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="export-options">
+                    <h4>Select Format</h4>
+                    <div class="format-options">
+                        <label class="format-option">
+                            <input type="radio" name="format" value="csv" checked>
+                            <span class="format-icon">
+                                <i class="fas fa-file-csv"></i>
+                            </span>
+                            <span class="format-name">CSV</span>
+                            <span class="format-desc">Spreadsheet format</span>
+                        </label>
+                        <label class="format-option">
+                            <input type="radio" name="format" value="excel">
+                            <span class="format-icon">
+                                <i class="fas fa-file-excel"></i>
+                            </span>
+                            <span class="format-name">Excel</span>
+                            <span class="format-desc">Excel workbook</span>
+                        </label>
+                        <label class="format-option">
+                            <input type="radio" name="format" value="json">
+                            <span class="format-icon">
+                                <i class="fas fa-file-code"></i>
+                            </span>
+                            <span class="format-name">JSON</span>
+                            <span class="format-desc">Structured data</span>
+                        </label>
+                        <label class="format-option">
+                            <input type="radio" name="format" value="pdf">
+                            <span class="format-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </span>
+                            <span class="format-name">PDF Report</span>
+                            <span class="format-desc">Visual report</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="export-settings">
+                    <h4>Export Settings</h4>
+                    <div class="setting-group">
+                        <label>Data Range</label>
+                        <select id="dataRange">
+                            <option value="all">All Data</option>
+                            <option value="filtered">Filtered Results</option>
+                            <option value="selected">Selected Floats</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label>Parameters</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" checked> Temperature</label>
+                            <label><input type="checkbox" checked> Salinity</label>
+                            <label><input type="checkbox" checked> Pressure</label>
+                            <label><input type="checkbox"> Oxygen</label>
+                        </div>
+                    </div>
+                    <div class="setting-group">
+                        <label>File Name</label>
+                        <input type="text" id="fileName" placeholder="argo_data_export" value="argo_data_export">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="cancelExport">Cancel</button>
+                <button class="btn-export" id="confirmExport">
+                    <i class="fas fa-download"></i>
+                    Export Data
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tooltip for Globe Dots -->
+    <div class="tooltip" id="tooltip">
+        <div class="tooltip-content">
+            <h4 id="tooltipTitle">ARGO Float</h4>
+            <p id="tooltipInfo">Click to explore data</p>
+            <div class="tooltip-actions">
+                <button class="tooltip-btn" id="viewDetails">
+                    <i class="fas fa-eye"></i>
+                    View Details
+                </button>
+                <button class="tooltip-btn" id="addToChat">
+                    <i class="fas fa-comment"></i>
+                    Ask About This
+                </button>
+            </div>
+        </div>
+    </div>
+
+        <!-- Scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+        <script src="leaflet-globe.js"></script>
+        <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,388 @@
+/* Animation classes and keyframes */
+
+/* Page transition animations */
+.tab-content {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab-content.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.tab-content.slide-out {
+    opacity: 0;
+    transform: translateX(-100px);
+}
+
+/* Globe animations */
+.globe {
+    animation: globeRotate 20s linear infinite;
+}
+
+@keyframes globeRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.globe:hover {
+    animation-play-state: paused;
+}
+
+/* ARGO dot animations */
+.argo-dot {
+    animation: floatPulse 2s ease-in-out infinite;
+}
+
+@keyframes floatPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+.argo-dot:hover {
+    animation: none;
+    transform: scale(1.5);
+}
+
+/* Chat overlay animations */
+.chat-overlay {
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUpFade 0.5s ease-out forwards;
+}
+
+@keyframes slideUpFade {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.chat-overlay.expanded {
+    animation: expandOverlay 0.3s ease-out forwards;
+}
+
+@keyframes expandOverlay {
+    from {
+        width: 400px;
+        height: auto;
+    }
+    to {
+        width: 50%;
+        height: 50%;
+    }
+}
+
+/* Message animations */
+.message {
+    animation: messageSlideIn 0.4s ease-out forwards;
+}
+
+@keyframes messageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message.user {
+    animation: messageSlideInRight 0.4s ease-out forwards;
+}
+
+@keyframes messageSlideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.message.assistant {
+    animation: messageSlideInLeft 0.4s ease-out forwards;
+}
+
+@keyframes messageSlideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Typing animation */
+.typing-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    animation: typingBounce 1.4s ease-in-out infinite both;
+}
+
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+.typing-dot:nth-child(3) { animation-delay: 0s; }
+
+@keyframes typingBounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* Mode transition animations */
+.app-container {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-transition {
+    animation: modeChange 0.6s ease-in-out forwards;
+}
+
+@keyframes modeChange {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Button hover animations */
+.tab-btn, .btn-login, .btn-signup, .send-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab-btn:hover, .btn-login:hover, .btn-signup:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.send-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+/* Filter animations */
+.filter-select {
+    transition: all 0.3s ease;
+}
+
+.filter-select:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+}
+
+/* Sidebar animations */
+.sidebar {
+    animation: sidebarSlideIn 0.5s ease-out forwards;
+}
+
+@keyframes sidebarSlideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.history-btn, .new-chat-btn, .alert-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.history-btn:hover, .new-chat-btn:hover, .alert-btn:hover {
+    transform: translateX(8px) scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Prompt card animations */
+.prompt-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: promptFadeIn 0.5s ease-out forwards;
+}
+
+@keyframes promptFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.prompt-card:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Loading animations */
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Fade in animations for content */
+.fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stagger animation for multiple elements */
+.stagger-item {
+    animation: staggerFadeIn 0.5s ease-out forwards;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0.1s; }
+.stagger-item:nth-child(2) { animation-delay: 0.2s; }
+.stagger-item:nth-child(3) { animation-delay: 0.3s; }
+.stagger-item:nth-child(4) { animation-delay: 0.4s; }
+.stagger-item:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes staggerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Notification animations */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    animation: notificationSlideIn 0.3s ease-out forwards;
+    z-index: 10000;
+}
+
+@keyframes notificationSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.notification.slide-out {
+    animation: notificationSlideOut 0.3s ease-in forwards;
+}
+
+@keyframes notificationSlideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Globe dot connection animations */
+.connection-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: connectionPulse 2s ease-in-out infinite;
+}
+
+@keyframes connectionPulse {
+    0%, 100% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+/* Responsive animations */
+@media (max-width: 768px) {
+    .globe {
+        animation-duration: 30s;
+    }
+    
+    .tab-content {
+        transition-duration: 0.3s;
+    }
+    
+    .message {
+        animation-duration: 0.3s;
+    }
+}
+
+@media (max-width: 480px) {
+    .globe {
+        animation-duration: 40s;
+    }
+    
+    .argo-dot {
+        animation-duration: 3s;
+    }
+}

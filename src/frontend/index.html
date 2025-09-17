@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌊 FloatChat - AI Ocean Data Explorer</title>
+    <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="static/css/animations.css">
+    <link rel="stylesheet" href="static/css/modes.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="app-container" data-mode="explorer">
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <div class="nav-left">
+                <div class="logo">
+                    <i class="fas fa-water"></i>
+                    <span>FloatChat</span>
+                </div>
+            </div>
+            
+            <div class="nav-center">
+                <div class="tab-container">
+                    <button class="tab-btn active" data-tab="globe">
+                        <i class="fas fa-globe"></i>
+                        <span>Globe</span>
+                    </button>
+                    <button class="tab-btn" data-tab="chatbot">
+                        <i class="fas fa-comments"></i>
+                        <span>Chatbot</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <div class="mode-switcher">
+                    <select id="modeSelect" class="mode-select">
+                        <option value="explorer">🧑‍🎓 Explorer</option>
+                        <option value="navigator">🐟 Navigator</option>
+                        <option value="researcher">👨‍🔬 Researcher</option>
+                    </select>
+                </div>
+                
+                <div class="language-selector">
+                    <select id="languageSelect" class="language-select">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="hi">🇮🇳 हिंदी</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="fr">🇫🇷 Français</option>
+                    </select>
+                </div>
+                
+                <div class="auth-buttons">
+                    <button class="btn-login">Login</button>
+                    <button class="btn-signup">Sign Up</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Globe Tab Content -->
+            <div class="tab-content active" id="globe-tab">
+                <div class="globe-layout">
+                    <!-- Left Sidebar -->
+                    <aside class="sidebar">
+                        <div class="sidebar-header">
+                            <div class="logo-small">
+                                <i class="fas fa-water"></i>
+                                <span>FloatChat</span>
+                            </div>
+                        </div>
+                        
+                        <div class="sidebar-content">
+                            <div class="history-section">
+                                <button class="history-btn">
+                                    <i class="fas fa-history"></i>
+                                    <span>History</span>
+                                </button>
+                                <button class="new-chat-btn">
+                                    <i class="fas fa-plus"></i>
+                                    <span>New Chat</span>
+                                </button>
+                            </div>
+                            
+                            <div class="alert-section">
+                                <button class="alert-btn">
+                                    <i class="fas fa-bell"></i>
+                                    <span>Alerts</span>
+                                    <span class="alert-badge">3</span>
+                                </button>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Filters Panel -->
+                    <div class="filters-panel">
+                        <h3>Data Filters</h3>
+                        <div class="filter-group">
+                            <label for="regionFilter">Region</label>
+                            <select id="regionFilter" class="filter-select">
+                                <option value="all">All Regions</option>
+                                <option value="indian">Indian Ocean</option>
+                                <option value="pacific">Pacific Ocean</option>
+                                <option value="atlantic">Atlantic Ocean</option>
+                                <option value="southern">Southern Ocean</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="countryFilter">Country</label>
+                            <select id="countryFilter" class="filter-select">
+                                <option value="all">All Countries</option>
+                                <option value="india">India</option>
+                                <option value="usa">United States</option>
+                                <option value="australia">Australia</option>
+                                <option value="japan">Japan</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="yearFilter">Year</label>
+                            <select id="yearFilter" class="filter-select">
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="parameterFilter">Parameters</label>
+                            <select id="parameterFilter" class="filter-select">
+                                <option value="all">All Parameters</option>
+                                <option value="temperature">Temperature</option>
+                                <option value="salinity">Salinity</option>
+                                <option value="oxygen">Oxygen</option>
+                                <option value="pressure">Pressure</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Globe Area -->
+                    <div class="globe-area">
+                        <div class="globe-container">
+                            <div class="globe" id="globe">
+                                <!-- ARGO Float Dots will be dynamically added here -->
+                            </div>
+                            
+                            <!-- Chat Input Overlay -->
+                            <div class="chat-overlay" id="chatOverlay">
+                                <div class="chat-input-container">
+                                    <button class="chat-icon-btn">
+                                        <i class="fas fa-comment"></i>
+                                    </button>
+                                    <input type="text" id="chatInput" placeholder="Ask about ocean data..." class="chat-input">
+                                    <button class="mic-btn">
+                                        <i class="fas fa-microphone"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chatbot Tab Content -->
+            <div class="tab-content" id="chatbot-tab">
+                <div class="chatbot-container">
+                    <div class="chatbot-header">
+                        <div class="chatbot-logo">
+                            <i class="fas fa-water"></i>
+                            <span>FloatChat</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chatbot-content">
+                        <div class="greeting-section">
+                            <div class="greeting-message">
+                                <h2>How may I help you?</h2>
+                                <p>Ask me anything about ocean data, ARGO floats, or marine research.</p>
+                            </div>
+                            
+                            <div class="suggested-prompts" id="suggestedPrompts">
+                                <!-- Dynamic prompts based on mode -->
+                            </div>
+                        </div>
+                        
+                        <div class="conversation-area" id="conversationArea">
+                            <!-- Chat messages will be added here -->
+                        </div>
+                        
+                        <div class="chat-input-area">
+                            <div class="chat-input-wrapper">
+                                <input type="text" id="chatbotInput" placeholder="Type your question..." class="chatbot-input">
+                                <button class="send-btn" id="sendBtn">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="static/js/modes.js"></script>
+    <script src="static/js/globe.js"></script>
+    <script src="static/js/chatbot.js"></script>
+    <script src="static/js/animations.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+</html>
