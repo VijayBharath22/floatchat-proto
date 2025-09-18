@@ -22,9 +22,8 @@
   </head>
 
   <body>
-    <!-- Top Controls (Centered) -->
+    <!-- Top Controls (Top Right, fixed position) -->
     <div class="top-controls">
-      <!-- Mode Switcher (Top Right) -->
       <div class="mode-switcher">
         <div class="mode-options">
           <button class="mode-btn" data-mode="explorer">
@@ -41,18 +40,15 @@
           </button>
         </div>
       </div>
-
-      <!-- Language Selector -->
       <div class="language-selector">
         <select id="languageSelect">
           <option value="en">English</option>
           <option value="hi">हिन्दी</option>
           <option value="ta">தமிழ்</option>
           <option value="te">తెలుగు</option>
+          <option value="ot">others</option>
         </select>
       </div>
-
-      <!-- Login/Signup Buttons -->
       <div class="auth-buttons">
         <button class="btn-login">Login</button>
         <button class="btn-signup">Sign Up</button>
@@ -65,9 +61,13 @@
       <div class="sidebar">
         <!-- Logo Section -->
         <div class="sidebar-header">
-          <div class="logo">
+          <div class="logo-icon">
             <i class="fas fa-water"></i>
-            <span>FloatChat</span>
+          </div>
+          <div class="sidebar-brand">
+            <span class="logo">
+              <a href=""> FloatChat </a>
+            </span>
           </div>
           <button class="hamburger-menu" id="hamburgerMenu">
             <span></span>
@@ -79,32 +79,32 @@
         <!-- Navigation Tabs -->
         <div class="sidebar-nav">
           <button class="nav-btn active" data-tab="globe">
-            <i class="fas fa-globe"></i>
-            <span>Globe</span>
+            <i class="fas fa-globe nav-icon"></i>
+            <span class="nav-text">Globe</span>
           </button>
           <button class="nav-btn" data-tab="chatbot">
-            <i class="fas fa-comments"></i>
-            <span>Chatbot</span>
+            <i class="fas fa-comments nav-icon"></i>
+            <span class="nav-text">Chatbot</span>
           </button>
         </div>
 
         <!-- Chat Actions -->
         <div class="sidebar-actions">
           <button class="action-btn" id="newChatBtn">
-            <i class="fas fa-plus"></i>
-            <span>New Chat</span>
+            <i class="fas fa-plus nav-icon"></i>
+            <span class="nav-text">New Chat</span>
           </button>
           <button class="action-btn" id="historyBtn">
-            <i class="fas fa-history"></i>
-            <span>History</span>
+            <i class="fas fa-history nav-icon"></i>
+            <span class="nav-text">History</span>
           </button>
           <button class="action-btn" id="exportBtn">
-            <i class="fas fa-download"></i>
-            <span>Export</span>
+            <i class="fas fa-download nav-icon"></i>
+            <span class="nav-text">Export</span>
           </button>
           <button class="action-btn" id="alertsBtn">
-            <i class="fas fa-bell"></i>
-            <span>Alerts</span>
+            <i class="fas fa-bell nav-icon"></i>
+            <span class="nav-text">Alerts</span>
           </button>
         </div>
 
@@ -116,7 +116,6 @@
             </div>
             <div class="user-info">
               <span class="user-name">Guest User</span>
-              <span class="user-role">Explorer</span>
             </div>
           </div>
           <div class="user-actions">
